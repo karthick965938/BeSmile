@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PyEmotion-Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="/static/js/animation.js"></script>
+</head>
+<body>
+	<div class="col-md-9" style="height: 100%;">
+		<div class="wrapper fadeInDown">
+		  <div id="videoSection">
+		    <!-- Icon -->
+		    <div class="fadeIn first">
+		      <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to PyEmotion</p>
+		    </div>
+
+		    <div class="fadeIn third">
+		    	<img id="bg" class="pd-15" src="{{ url_for('video_feed') }}">
+		    </div>
+
+		    <div class="fadeIn fourth">
+		    	<button class="app-btn fadeIn fifth">Reports</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-3" style="height: 100%;">
+		<div class="wrapper fadeInDown">
+			<div id="emotionSection">
+
+		    <div class="fadeIn first">
+		      <img src="/static/images/Neutral.png" class="count-img pd-15 fadeIn first">
+		      <span id="neutral"></span>
+		    </div>
+
+				<div class="fadeIn second">
+		      <img src="/static/images/Happy.png" class="count-img pd-15 fadeIn second">
+		      <span id="happy"></span>
+		    </div>
+
+		    <div class="fadeIn third">
+		      <img src="/static/images/Sad.png" class="count-img pd-15 fadeIn third">
+		      <span id="sad"></span>
+		    </div>
+
+		    <div class="fadeIn fourth">
+		      <img src="/static/images/Angry.png" class="count-img pd-15 fadeIn fourth">
+		      <span id="angry"></span>
+		    </div>
+
+		    <div class="fadeIn fifth">
+		      <img src="/static/images/Fear.png" class="count-img pd-15 fadeIn fifth">
+		      <span id="fear"></span>
+		    </div>
+
+		    <div class="fadeIn sixth">
+		      <img src="/static/images/Surprise.png" class="count-img pd-15 fadeIn sixth">
+		      <span id="surprise"></span>
+		    </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PyEmotion</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="wrapper fadeInDown">
+	  <div id="formContent">
+	    <!-- Tabs Titles -->
+
+	    <!-- Icon -->
+	    <div class="fadeIn first">
+	      <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to PyEmotion</p>
+	    </div>
+
+	    <!-- Login Form -->
+	    <form id="StoreEmail" action="/userDetailStore" method="POST">
+	      <input type="email" id="login" class="fadeIn third" name="email" placeholder="Enter your email to start" required>
+	      <p class="pd-15 fadeIn fourth">Why need email? <b>We will send overall report to you</b></p>
+	      <input type="submit" class="fadeIn fifth" value="Start">
+	    </form>
+	  </div>
+	</div>
+</body>
+</html>
