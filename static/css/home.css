@@ -162,3 +162,8 @@ img.count-img{
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+a:focus, a:hover {
+  color: #fff !important;
+  text-decoration: none !important;
+}

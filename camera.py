@@ -18,7 +18,11 @@ class VideoCamera(object):
   
   def get_frame(self):
     success, frame = self.video.read()
-    image = er.predict_emotion(frame)
+    image, emotion = er.predict_emotion(frame)
+    if emotion:
+    	save_emotion(emotion) 
     ret, jpeg = cv2.imencode('.jpg', image)
     return jpeg.tobytes()
-  	
+
+  def save_emotion(emotion):
+  	print(emotion)
