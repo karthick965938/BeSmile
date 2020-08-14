@@ -1,0 +1,12 @@
+flask
+threading
+PyEmotion
+cv2
+time
+random
+datetime
+webbrowser
+sqlite3
+notify2
+dbus-python
+Flask-APScheduler

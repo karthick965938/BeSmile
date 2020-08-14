@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>PyEmotion-Home</title>
+  <title>BeSmile-Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
@@ -16,7 +16,7 @@
 		  <div id="videoSection">
 		    <!-- Icon -->
 		    <div class="fadeIn first">
-		      <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to PyEmotion</p>
+		      <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to BeSmile</p>
 		    </div>
 
 		    <div class="fadeIn third">
@@ -24,7 +24,7 @@
 		    </div>
 
 		    <div class="fadeIn fourth">
-		    	<button type="button" class="app-btn fadeIn fifth" data-toggle="modal" data-target="#myModal">Reports</button>
+		    	<a href="/reports" target="_blank" class="app-btn fadeIn fifth">Reports</a>
 		    </div>
 		  </div>
 		</div>
@@ -35,55 +35,41 @@
 
 		    <div class="fadeIn first">
 		      <img src="/static/images/Neutral.png" class="count-img pd-15 fadeIn first">
+		      <span>Neutral</span>
 		      <span id="neutral"></span>
 		    </div>
 
 				<div class="fadeIn second">
 		      <img src="/static/images/Happy.png" class="count-img pd-15 fadeIn second">
+		      <span>Happy</span>
 		      <span id="happy"></span>
 		    </div>
 
 		    <div class="fadeIn third">
 		      <img src="/static/images/Sad.png" class="count-img pd-15 fadeIn third">
+		      <span>Sad</span>
 		      <span id="sad"></span>
 		    </div>
 
 		    <div class="fadeIn fourth">
 		      <img src="/static/images/Angry.png" class="count-img pd-15 fadeIn fourth">
+		      <span>Angry</span>
 		      <span id="angry"></span>
 		    </div>
 
 		    <div class="fadeIn fifth">
 		      <img src="/static/images/Fear.png" class="count-img pd-15 fadeIn fifth">
+		      <span>Fear</span>
 		      <span id="fear"></span>
 		    </div>
 
 		    <div class="fadeIn sixth">
 		      <img src="/static/images/Surprise.png" class="count-img pd-15 fadeIn sixth">
+		      <span>Surprise</span>
 		      <span id="surprise"></span>
 		    </div>
 			</div>
 		</div>
-	</div>
-	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Emotion Report</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>Some text in the modal.</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-
-	  </div>
 	</div>
 </body>
 </html>

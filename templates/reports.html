@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{title}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/loader.js"></script>
+  <script type="text/javascript">
+  	function getEmotionCount() {
+			$.ajax({
+		    type: 'POST',
+		    url: 'emotion_count',
+		    data : {'data': 'today'},
+		    dataType: "json",
+		    success: function(result) {
+		      google.charts.load("current", {packages:["corechart"]});
+			    google.charts.setOnLoadCallback(drawChart);
+			    function drawChart() {
+			      var data = google.visualization.arrayToDataTable([
+			      	['Emotions', 'Counts per Day'],
+			        ['Neutral', Number(result['Neutral'])],
+			        ['Angry', Number(result['Angry'])],
+			        ['Happy', Number(result['Happy'])],
+			        ['Sad', Number(result['Sad'])],
+			        ['Fear', Number(result['Fear'])],
+			        ['Surprise', Number(result['Surprise'])]
+			      ]);
+
+			      var options = {
+			        is3D: true,
+			        width: 900,
+			        height: 500,
+			        slices: {  
+			          1: {offset: 0.3},
+			          3: {offset: 0.3},
+			          4: {offset: 0.3}
+			        }
+			      };
+
+			      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+			      chart.draw(data, options);
+			    }
+		    }
+		  });
+		}
+	getEmotionCount();
+  </script>
+</head>
+<body>
+	<div class="container">
+	  <h2>Reports</h2>
+	  <div class="panel panel-primary">
+	    <div class="panel-heading">Daily Emotions Count</div>
+	    <div class="panel-body">
+	    	<div class="row">
+		    	<div class="col-md-4 col-md-offset-4">
+		    		<div class="form-group">
+					    <input type="text" class="form-control">
+					  </div>
+		    	</div>
+	    	</div>
+	    	<div class="row">
+	    		<div id="piechart_3d" align='center'></div>
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

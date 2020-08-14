@@ -1,18 +1,33 @@
 from flask import Flask, render_template, Response, request, json, redirect, url_for
 from threading import Timer
 from camera import VideoCamera
+from joke import jokes
 from datetime import datetime
+from flask_apscheduler import APScheduler
 import webbrowser
 import os
-import csv
+import sqlite3 as sql
+import notify2
+import random
 
 app = Flask(__name__)
-user_detail_file = os.path.dirname(os.path.realpath(__file__))
+
+#function executed by scheduled job
+def show_joke(text):
+  notify2.init('BeSmile')
+  n = notify2.Notification('Joke From BeSmile', random.choice(jokes))
+  n.timeout=20000
+  n.show()
 
 @app.route('/')
 def index():
   user = os.environ['USER'].title()
-  if os.path.exists(user_detail_file+"/user_details.txt"):
+  con = sql.connect("DB/database.db")
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  cur.execute("select * from user")
+  rows = cur.fetchall();
+  if rows:
     return render_template('home.html', **locals())
   else:
     return render_template('index.html', **locals())
@@ -20,49 +35,63 @@ def index():
 @app.route('/userDetailStore', methods=['POST'])
 def userDetailStore():
   email =  request.form['email'];
-  if os.path.exists(user_detail_file+"/user_details.txt"):
-    f = open("user_details.txt", "a")
-    f.write(email)
-    f.close()
-  else:
-    f = open("user_details.txt", "wt")
-    f.write(email)
-    f.close()
+  time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+  try: 
+    with sql.connect("DB/database.db") as con:
+      cur = con.cursor()
+      cur.execute("INSERT INTO user (email_address,created_at) VALUES (?,?)",(email, time))
+      con.commit()
+  except:
+    con.rollback()
+  finally:
+    con.close()
   return redirect("/")
 
-@app.route('/emotion_count', methods=['GET'])
+@app.route('/emotion_count', methods=['POST'])
 def getEmotionCount():
-  # file  = open('emotion_details.csv', "r")
-  # a = {'Angry' : 0, 'Disgust' : 0, 'Fear' : 0, 'Happy' : 0, 'Sad' : 0, 'Surprise' : 0, 'Neutral' : 0, 'NoFace' : 0, 'Discussion' : 0 }
-  # read = csv.reader(file)
-  # for i, row in enumerate(read):
-  #   if row[0] in a:
-  #     a[row[0]] += 1
-  # return str(a)
+  user = os.environ['USER'].title()
+  date = datetime.now().strftime("%d-%m-%Y")
+  con = sql.connect("DB/database.db")
+  neutral = con.cursor()
+  neutral.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Neutral', (request.form['data'], date)[request.form['data'] == 'today']))
+  neutral_count = neutral.fetchall()
+  happy = con.cursor()
+  happy.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Happy', (request.form['data'], date)[request.form['data'] == 'today']))
+  happy_count = happy.fetchall()
+  sad = con.cursor()
+  sad.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Sad', (request.form['data'], date)[request.form['data'] == 'today']))
+  sad_count = sad.fetchall()
+  angry = con.cursor()
+  angry.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Angry', (request.form['data'], date)[request.form['data'] == 'today']))
+  angry_count = angry.fetchall()
+  fear = con.cursor()
+  fear.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Fear', (request.form['data'], date)[request.form['data'] == 'today']))
+  fear_count = fear.fetchall()
+  surprise = con.cursor()
+  surprise.execute("SELECT name FROM emotions WHERE name=? AND create_date=?", ('Surprise', (request.form['data'], date)[request.form['data'] == 'today']))
+  surprise_count = surprise.fetchall()
+  return json.dumps({'Neutral':len(neutral_count), 'Happy':len(happy_count), 'Sad':len(sad_count), 'Angry':len(angry_count), 'Fear':len(fear_count), 'Surprise':len(surprise_count)});
 
-  # get it from the db
-# get the reports
 @app.route('/reports')
 def report():
-  return render_template('report.html', **locals())
+  return render_template('reports.html', user=os.environ['USER'].title(), title='BeSmile-Reports')
 
-# Init webcam feed
 def gen(camera):
   while True:
     frame = camera.get_frame()
     yield (b'--frame\r\n'
       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-# Show webcam feed
 @app.route('/video_feed')
 def video_feed():
   return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-# Init the browser open after the app start
 def open_browser():
   webbrowser.open_new('http://127.0.0.1:2000/')
 
-# start the FLASK app, and open ther browser
 if __name__ == "__main__":
+  scheduler = APScheduler()
+  scheduler.add_job(func=show_joke, args=['Joke Start'], trigger='interval', id='job', seconds=600)
+  scheduler.start()
   Timer(1, open_browser).start();
   app.run(port=2000)
