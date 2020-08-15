@@ -1,6 +1,6 @@
 # BeSmile
 
-**[BeSmile](https://pypi.org/project/PyEmotion/)** - A Python Web App for Facial Emotion Recognition using PyTorch. BeSmile is developed and using PyEmotion
+**BeSmile** - A Python Web App for Facial Emotion Recognition using PyTorch. BeSmile is developed and using [PyEmotion](https://pypi.org/project/PyEmotion/)
 
 
 **Author**: Karthick Nagarajan
