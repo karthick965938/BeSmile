@@ -26,8 +26,8 @@ PyEmotion >= 1.0.0
 All issues and pull requests are welcome! To run the code locally, first, fork the repository and then run the following commands on your computer:
 
 ```sh
-git clone https://github.com/<your-username>/PyEmotion.git
-cd PyEmotion
+git clone https://github.com/<your-username>/BeSmile.git
+cd BeSmile
 # Recommended creating a virtual environment before the next step
 pip3 install -r requirements.txt
 ```
