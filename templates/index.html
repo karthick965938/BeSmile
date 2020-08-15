@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>BeSmile</title>
+  <title>{{title}}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
@@ -12,19 +12,16 @@
 <body>
 	<div class="wrapper fadeInDown">
 	  <div id="formContent">
-	    <!-- Tabs Titles -->
 
-	    <!-- Icon -->
-	    <div class="fadeIn first">
-	      <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to BeSmile</p>
-	    </div>
-
-	    <!-- Login Form -->
-	    <form id="StoreEmail" action="/userDetailStore" method="POST">
-	      <input type="email" id="login" class="fadeIn third" name="email" placeholder="Enter your email to start" required>
-	      <p class="pd-15 fadeIn fourth">Why need email? <b>We will send overall report to you</b></p>
-	      <input type="submit" class="fadeIn fifth" value="Start">
-	    </form>
+			<div class="fadeIn first">
+			  <p class="pd-15 fadeIn second">Hi <b>{{user}}!</b> Welcome to BeSmile</p>
+			</div>
+			
+			<form id="StoreEmail" action="/userDetailStore" method="POST">
+			  <input type="email" id="login" class="fadeIn third" name="email" placeholder="Enter your email to start" required>
+			  <p class="pd-15 fadeIn fourth">Why need email? <b>We will send overall report to you</b></p>
+			  <input type="submit" class="fadeIn fifth" value="Start">
+			</form>
 	  </div>
 	</div>
 </body>

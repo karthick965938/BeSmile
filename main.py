@@ -28,8 +28,10 @@ def index():
   cur.execute("select * from user")
   rows = cur.fetchall();
   if rows:
+    title = 'BeSmile-Home'
     return render_template('home.html', **locals())
   else:
+    title = 'BeSmile'
     return render_template('index.html', **locals())
 
 @app.route('/userDetailStore', methods=['POST'])
@@ -72,10 +74,6 @@ def getEmotionCount():
   surprise_count = surprise.fetchall()
   return json.dumps({'Neutral':len(neutral_count), 'Happy':len(happy_count), 'Sad':len(sad_count), 'Angry':len(angry_count), 'Fear':len(fear_count), 'Surprise':len(surprise_count)});
 
-@app.route('/reports')
-def report():
-  return render_template('reports.html', user=os.environ['USER'].title(), title='BeSmile-Reports')
-
 def gen(camera):
   while True:
     frame = camera.get_frame()
@@ -87,11 +85,11 @@ def video_feed():
   return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def open_browser():
-  webbrowser.open_new('http://127.0.0.1:2000/')
+  webbrowser.open_new('http://127.0.0.1:2008/')
 
 if __name__ == "__main__":
   scheduler = APScheduler()
   scheduler.add_job(func=show_joke, args=['Joke Start'], trigger='interval', id='job', seconds=600)
   scheduler.start()
   Timer(1, open_browser).start();
-  app.run(port=2000)
+  app.run(port=2008)

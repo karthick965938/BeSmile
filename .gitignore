@@ -2,7 +2,7 @@ build/
 dist/
 test_assets/
 # ignore setup
-emotion_details.csv
 test.py
 emotion.rxml
 user_details.txt
+test_notify.py

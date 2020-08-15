@@ -1,12 +1,31 @@
-html, body{
-	background: #a3a9b3;
-	/*color: #fff;*/
-	height: 100%;
+html, body{height: 100%;}
+
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }
 
-.pd-15{ padding: 15px;margin: 0; }
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-/* STRUCTURE */
+.ht-100{height: 100%;}
+.pd-15{padding: 15px;margin: 0;}
+
+#piechart_3d{
+  min-height: 500px;
+  margin: 20px;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -42,7 +61,6 @@ img.count-img{
 	padding-left: 10%;
 }
 
-/* ANIMATIONS */
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -78,7 +96,6 @@ img.count-img{
   }
 }
 
-/* Simple CSS3 Fade-in Animation */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
