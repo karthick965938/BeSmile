@@ -85,11 +85,11 @@ def video_feed():
   return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def open_browser():
-  webbrowser.open_new('http://127.0.0.1:2008/')
+  webbrowser.open_new('http://127.0.0.1:2000/')
 
 if __name__ == "__main__":
   scheduler = APScheduler()
   scheduler.add_job(func=show_joke, args=['Joke Start'], trigger='interval', id='job', seconds=600)
   scheduler.start()
   Timer(1, open_browser).start();
-  app.run(port=2008)
+  app.run(port=2000)

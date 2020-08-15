@@ -6,12 +6,11 @@ BeSmile = {
 
   start: function(){
     BeSmile.emotionCount('POST', 'emotion_count', 'today', "json");
-    $("#neutral").html(BeSmile.emotionResult["Neutral"]);
-    $("#happy").html(BeSmile.emotionResult["Happy"]);
-    $("#sad").html(BeSmile.emotionResult["Sad"]);
-    $("#angry").html(BeSmile.emotionResult["Angry"]);
-    $("#fear").html(BeSmile.emotionResult["Fear"]);
-    $("#surprise").html(BeSmile.emotionResult["Surprise"]);
+    $.each(BeSmile.emotionResult, function(index) {
+      $.each(BeSmile.emotionResult[index], function(key, value) {
+        $("#"+key.toLowerCase()).html(value);
+      });
+    });
   },
   emotionCount: function(type, url, date, data_type){
     $.ajax({
@@ -53,6 +52,9 @@ BeSmile = {
       reportChart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
       reportChart.draw(reportData, reportOptions);
     }
+    google.visualization.events.addListener(chart, 'ready', function() {
+      $('.loader').hide();
+    });
   }
 }
 
