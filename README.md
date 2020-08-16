@@ -16,9 +16,12 @@ python main.py
 
 ## Requirements
 conda list -n detectron2
-pytorch >= 1.2.0
-torchvision >= 0.3.0
-PyEmotion >= 1.0.0
+```sh
+pytorch >= 1.5.1
+torchvision >= 0.6.1
+pyemotion >= 0.0.5
+facenet-pytorch >= 2.3.0
+```
 
 
 
