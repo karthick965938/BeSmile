@@ -21,6 +21,9 @@ pytorch >= 1.5.1
 torchvision >= 0.6.1
 pyemotion >= 0.0.5
 facenet-pytorch >= 2.3.0
+sqlite >= 3.32.3
+flask-apscheduler >= 1.11.0
+notify2 >= 0.3.1
 ```
 
 
