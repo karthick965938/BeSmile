@@ -22,7 +22,7 @@ body {
 .pd-15{padding: 15px;margin: 0;}
 
 #piechart_3d{
-  min-height: 500px;
+  min-height: 400px;
   margin: 20px;
 }
 
@@ -183,25 +183,4 @@ img.count-img{
 a:focus, a:hover {
   color: #fff !important;
   text-decoration: none !important;
-}
-
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }

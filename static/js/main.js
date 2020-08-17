@@ -6,10 +6,8 @@ BeSmile = {
 
   start: function(){
     BeSmile.emotionCount('POST', 'emotion_count', 'today', "json");
-    $.each(BeSmile.emotionResult, function(index) {
-      $.each(BeSmile.emotionResult[index], function(key, value) {
-        $("#"+key.toLowerCase()).html(value);
-      });
+    $.each(BeSmile.emotionResult, function(key, value) {
+      $("#"+key.toLowerCase()).html(value);
     });
   },
   emotionCount: function(type, url, date, data_type){
@@ -24,9 +22,8 @@ BeSmile = {
     });
     return BeSmile.emotionResult
   },
-  report: function(){
+  initReport: function(){
     BeSmile.emotionCount('POST', 'emotion_count', 'today', "json");
-    $('#reportModal').modal('show');
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -43,7 +40,7 @@ BeSmile = {
       reportOptions = {
         is3D: true,
         width: 800,
-        height: 500,
+        height: 400,
         slices: {  
           2: {offset: 0.3}
         }
@@ -52,14 +49,18 @@ BeSmile = {
       reportChart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
       reportChart.draw(reportData, reportOptions);
     }
-    google.visualization.events.addListener(chart, 'ready', function() {
-      $('.loader').hide();
-    });
+  },
+  openPoup: function(){
+    BeSmile.initReport()
+    $('#reportModal').modal('show');
   }
 }
 
 $(document).ready(function() {
-  $('#btn-section').on('click', '.report-btn', BeSmile.report);
+  // init report
+  BeSmile.initReport()
+  // when report btn click reports will show
+  $('#btn-section').on('click', '.report-btn', BeSmile.openPoup);
   setInterval(function(){
     BeSmile.start()
   }, 1000);

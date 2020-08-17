@@ -1,10 +1,8 @@
 from flask import Flask, render_template, Response, request, json, redirect, url_for
-from threading import Timer
 from camera import VideoCamera
 from joke import jokes
 from datetime import datetime
 from flask_apscheduler import APScheduler
-import webbrowser
 import os
 import sqlite3 as sql
 import notify2
@@ -12,22 +10,28 @@ import random
 
 app = Flask(__name__)
 
-#function executed by scheduled job
-def show_joke(text):
-  notify2.init('BeSmile')
-  n = notify2.Notification('Joke From BeSmile', random.choice(jokes))
-  n.timeout=20000
-  n.show()
-
-@app.route('/')
-def index():
-  user = os.environ['USER'].title()
+def get_user_data():
   con = sql.connect("DB/database.db")
   con.row_factory = sql.Row
   cur = con.cursor()
   cur.execute("select * from user")
-  rows = cur.fetchall();
-  if rows:
+  user = cur.fetchall();
+  if user:
+    return True
+  return False
+
+#function executed by scheduled job
+def show_joke(text):
+  if get_user_data():
+    notify2.init('BeSmile')
+    n = notify2.Notification('Joke From BeSmile', random.choice(jokes))
+    n.timeout=20000
+    n.show()
+
+@app.route('/')
+def index():
+  username = os.environ['USER'].title()
+  if get_user_data():
     title = 'BeSmile-Home'
     return render_template('home.html', **locals())
   else:
@@ -84,12 +88,8 @@ def gen(camera):
 def video_feed():
   return Response(gen(VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def open_browser():
-  webbrowser.open_new('http://127.0.0.1:2000/')
-
 if __name__ == "__main__":
   scheduler = APScheduler()
   scheduler.add_job(func=show_joke, args=['Joke Start'], trigger='interval', id='job', seconds=600)
   scheduler.start()
-  Timer(1, open_browser).start();
-  app.run(port=2000)
+  app.run('0.0.0.0', 8085)
