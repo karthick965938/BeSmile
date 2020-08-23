@@ -1,10 +1,8 @@
-flask
-PyEmotion
-cv2
-time
-random
-datetime
-sqlite3
+Flask==1.0.2
+Flask-APScheduler==1.11.0
+PyEmotion==0.0.5
+opencv-python
+torch
+torchvision
 notify2
 dbus-python
-Flask-APScheduler

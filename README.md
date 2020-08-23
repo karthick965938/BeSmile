@@ -8,6 +8,11 @@
 **Email**: karthick965938@gmail.com
 
 ## Run
+We can create local database using this command. Database is mandatory one, without DB we can't store the details.
+
+```sh
+python db.py
+```
 We can run this application using this command
 
 ```sh
@@ -15,7 +20,6 @@ python main.py
 ```
 
 ## Requirements
-conda list -n detectron2
 pytorch >= 1.2.0
 torchvision >= 0.3.0
 PyEmotion >= 1.0.0

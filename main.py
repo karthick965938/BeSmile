@@ -12,11 +12,10 @@ app = Flask(__name__)
 
 def get_user_data():
   con = sql.connect("DB/database.db")
-  con.row_factory = sql.Row
   cur = con.cursor()
   cur.execute("select * from user")
   user = cur.fetchall();
-  if user:
+  if len(user) > 0 :
     return True
   return False
 
