@@ -19,6 +19,16 @@ We can run this application using this command
 python main.py
 ```
 
+## Sample Screens
+
+
+![Welcome Page](https://github.com/karthick965938/BeSmile/blob/master/assets/1.png)
+
+![Main Page](https://github.com/karthick965938/BeSmile/blob/master/assets/2.png)
+
+![Report Page](https://github.com/karthick965938/BeSmile/blob/master/assets/3.png)
+
+
 ## Requirements
 ```sh
 pytorch >= 1.5.1
